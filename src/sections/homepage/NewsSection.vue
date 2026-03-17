@@ -3,22 +3,12 @@ import Container from '@/components/ui/Container.vue'
 import Button from '@/components/ui/Button.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
 import { RouterLink } from 'vue-router'
+import { formatDate } from '@/utils/formatDate'
+import { truncateText } from '@/utils/truncateText'
 
 import { useNews } from '@/composables/useNews'
 
 const { news, loading } = useNews()
-
-const formatDate = (date: string) => {
-  return new Date(date).toLocaleDateString('id-ID', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
-}
-
-const excerpt = (text: string) => {
-  return text.slice(0, 120) + '...'
-}
 </script>
 
 <template>
@@ -41,16 +31,17 @@ const excerpt = (text: string) => {
       <!-- Grid -->
 
       <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <article v-for="article in news" :key="article.id" class="news-card group">
-          <RouterLink :to="`/berita/${article.slug}`">
+        <article v-for="articleItem in news" :key="articleItem.id" class="news-card group">
+          <RouterLink :to="`/berita/${articleItem.slug}`">
             <!-- Image -->
 
             <div class="relative overflow-hidden">
               <img
-                :src="article.image || '/images/placeholder.webp'"
-                :alt="article.title"
+                :src="articleItem.image || '/images/placeholder.webp'"
+                :alt="articleItem.title"
                 class="w-full h-56 object-cover transition duration-500 group-hover:scale-110"
                 loading="lazy"
+                decoding="async"
               />
 
               <!-- Overlay -->
@@ -64,7 +55,7 @@ const excerpt = (text: string) => {
               <div
                 class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-md text-xs font-medium text-gray-700"
               >
-                {{ formatDate(article.created_at) }}
+                {{ formatDate(articleItem.created_at) }}
               </div>
             </div>
 
@@ -72,11 +63,11 @@ const excerpt = (text: string) => {
 
             <div class="p-6">
               <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary transition">
-                {{ article.title }}
+                {{ articleItem.title }}
               </h3>
 
               <p class="mt-3 text-gray-600 text-sm leading-relaxed">
-                {{ excerpt(article.content) }}
+                {{ truncateText(articleItem.content) }}
               </p>
             </div>
           </RouterLink>

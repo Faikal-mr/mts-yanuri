@@ -1,26 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import newsRoutes from './modules/news'
 
+const HomePage = () => import('@/pages/HomePage.vue')
+const TentangPage = () => import('@/pages/TentangPage.vue')
+const ProgramPage = () => import('@/pages/ProgramPage.vue')
+const BeritaPage = () => import('@/pages/BeritaPage.vue')
+const KontakPage = () => import('@/pages/KontakPage.vue')
 const routes = [
   {
     path: '/',
-    component: () => import('../pages/HomePage.vue'),
+    component: HomePage,
   },
   {
     path: '/tentang',
-    component: () => import('../pages/TentangPage.vue'),
+    component: TentangPage,
   },
   {
     path: '/program',
-    component: () => import('../pages/ProgramPage.vue'),
+    component: ProgramPage,
   },
   {
     path: '/berita',
-    component: () => import('../pages/BeritaPage.vue'),
+    component: BeritaPage,
   },
   {
     path: '/kontak',
-    component: () => import('../pages/KontakPage.vue'),
+    component: KontakPage,
   },
 
   ...newsRoutes,

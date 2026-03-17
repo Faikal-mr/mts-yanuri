@@ -1,32 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
+import SectionTitle from '@/components/ui/SectionTitle.vue'
+import { PROGRAM_LIST } from '@/constants/program'
 
-const programs = [
-  {
-    id: 1,
-    title: "Tahfidz Al-Qur'an",
-    desc: 'Program unggulan untuk membentuk generasi penghafal Al-Qur’an.',
-    icon: '📖',
-  },
-  {
-    id: 2,
-    title: 'Bahasa Arab',
-    desc: 'Pembelajaran bahasa Arab aktif untuk memahami literatur Islam.',
-    icon: '🕌',
-  },
-  {
-    id: 3,
-    title: 'Sains & Teknologi',
-    desc: 'Penguatan ilmu pengetahuan dan teknologi modern.',
-    icon: '🔬',
-  },
-  {
-    id: 4,
-    title: 'Karakter Islami',
-    desc: 'Pembentukan akhlak dan karakter berdasarkan nilai Islam.',
-    icon: '🌱',
-  },
-]
+const programList = PROGRAM_LIST
 </script>
 
 <template>
@@ -47,8 +24,8 @@ const programs = [
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div
-          v-for="program in programs"
-          :key="program.id"
+          v-for="programItem in programList"
+          :key="programItem.id"
           class="group relative bg-gray-50 rounded-xl p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
         >
           <!-- Icon -->
@@ -56,19 +33,19 @@ const programs = [
           <div
             class="w-14 h-14 flex items-center justify-center rounded-lg bg-primary/10 text-3xl mb-6 transition group-hover:bg-primary group-hover:text-white"
           >
-            {{ program.icon }}
+            {{ programItem.icon }}
           </div>
 
           <!-- Title -->
 
           <h3 class="text-lg font-semibold mb-3 text-gray-900 transition group-hover:text-primary">
-            {{ program.title }}
+            {{ programItem.title }}
           </h3>
 
           <!-- Description -->
 
           <p class="text-gray-600 text-sm leading-relaxed">
-            {{ program.desc }}
+            {{ programItem.description }}
           </p>
 
           <!-- Hover Border -->

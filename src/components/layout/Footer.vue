@@ -1,45 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
 import { RouterLink } from 'vue-router'
+import { FOOTER_DATA } from '@/constants/footer'
 
-const school = {
-  name: 'MTs Yanuri Annamira',
-  description:
-    'Madrasah Tsanawiyah yang berkomitmen membentuk generasi Qurani yang berakhlak mulia dan unggul dalam ilmu pengetahuan.',
-}
+const { school, navigation, contacts, socials } = FOOTER_DATA
 
-const navigation = [
-  { label: 'Beranda', to: '/' },
-  { label: 'Tentang', to: '/tentang' },
-  { label: 'Program', to: '/program' },
-  { label: 'Berita', to: '/berita' },
-]
-
-const contacts = [
-  { icon: '📍', text: 'Jl. Pendidikan No.10' },
-  { icon: '📞', text: '0812-3456-7890' },
-  { icon: '✉', text: 'info@yanuri.sch.id' },
-]
-
-const socials = [
-  {
-    name: 'Facebook',
-    icon: 'f',
-    url: 'https://facebook.com/',
-  },
-  {
-    name: 'Instagram',
-    icon: 'i',
-    url: 'https://instagram.com/',
-  },
-  {
-    name: 'YouTube',
-    icon: '▶',
-    url: 'https://youtube.com/',
-  },
-]
-
-const year = new Date().getFullYear()
+const currentYear = new Date().getFullYear()
 </script>
 
 <template>
@@ -66,9 +32,9 @@ const year = new Date().getFullYear()
           <h4 class="text-white font-semibold mb-4">Navigasi</h4>
 
           <ul class="space-y-2">
-            <li v-for="item in navigation" :key="item.label">
-              <RouterLink :to="item.to" class="hover:text-white transition text-sm">
-                {{ item.label }}
+            <li v-for="navItem in navigation" :key="navItem.path">
+              <RouterLink :to="navItem.path" class="hover:text-white transition text-sm">
+                {{ navItem.name }}
               </RouterLink>
             </li>
           </ul>
@@ -81,13 +47,12 @@ const year = new Date().getFullYear()
 
           <ul class="space-y-3 text-gray-400">
             <li
-              v-for="contact in contacts"
-              :key="contact.text"
+              v-for="contactItem in contacts"
+              :key="contactItem.text"
               class="flex items-start gap-2 text-sm"
             >
-              <span>{{ contact.icon }}</span>
-
-              <span>{{ contact.text }}</span>
+              <span>{{ contactItem.icon }}</span>
+              <span>{{ contactItem.text }}</span>
             </li>
           </ul>
         </div>
@@ -99,14 +64,14 @@ const year = new Date().getFullYear()
 
           <div class="flex gap-4">
             <a
-              v-for="social in socials"
-              :key="social.name"
-              :href="social.url"
+              v-for="socialItem in socials"
+              :key="socialItem.name"
+              :href="socialItem.url"
               target="_blank"
-              rel="noopener"
-              class="social-icon"
+              rel="noopener noreferrer"
+              class="social-icon hover:text-white transition text-sm"
             >
-              {{ social.icon }}
+              {{ socialItem.icon }}
             </a>
           </div>
         </div>
@@ -115,7 +80,7 @@ const year = new Date().getFullYear()
       <!-- Divider -->
 
       <div class="border-t border-gray-800 mt-16 pt-6 text-center text-gray-500 text-sm">
-        © {{ year }} {{ school.name }}. Semua Hak Dilindungi.
+        © {{ currentYear }} {{ school.name }}. Semua Hak Dilindungi.
       </div>
     </Container>
   </footer>

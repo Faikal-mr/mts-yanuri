@@ -1,33 +1,32 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import Container from '@/components/ui/Container.vue'
 import Button from '@/components/ui/Button.vue'
+import { HERO_DATA } from '@/constants/hero'
 
-const slides = ['/images/sekolah1.webp', '/images/sekolah2.webp']
-
-const stats = [
-  { label: 'Siswa', value: '500+' },
-  { label: 'Guru', value: '30+' },
-  { label: 'Tahun Berdiri', value: '10+' },
-]
+const { slides, stats } = HERO_DATA
 
 const currentSlide = ref(0)
-let sliderInterval = null
+let sliderInterval: ReturnType<typeof setInterval> | null = null
 
-const nextSlide = () => {
+const goToNextSlide = () => {
+  if (!slides.length) return
   currentSlide.value = (currentSlide.value + 1) % slides.length
 }
 
-const setSlide = (index) => {
+const setSlide = (index: number) => {
   currentSlide.value = index
 }
 
 onMounted(() => {
-  sliderInterval = setInterval(nextSlide, 5000)
+  sliderInterval = setInterval(goToNextSlide, 5000)
 })
 
 onUnmounted(() => {
-  clearInterval(sliderInterval)
+  if (sliderInterval !== null) {
+    clearInterval(sliderInterval)
+    sliderInterval = null
+  }
 })
 </script>
 
@@ -38,14 +37,15 @@ onUnmounted(() => {
     <div class="absolute inset-0">
       <img
         v-for="(slide, index) in slides"
-        :key="slide"
+        :key="index"
         :src="slide"
         :loading="index === 0 ? 'eager' : 'lazy'"
+        decoding="async"
         class="absolute w-full h-full object-cover hero-zoom transition-opacity duration-1000"
         :class="index === currentSlide ? 'opacity-100' : 'opacity-0'"
       />
     </div>
-    c
+
     <!-- Overlay -->
 
     <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10"></div>
@@ -85,13 +85,13 @@ onUnmounted(() => {
         <!-- Stats -->
 
         <div class="mt-12 grid grid-cols-3 gap-8 max-w-md">
-          <div v-for="stat in stats" :key="stat.label">
+          <div v-for="statItem in stats" :key="statItem.label">
             <p class="text-3xl font-bold">
-              {{ stat.value }}
+              {{ statItem.value }}
             </p>
 
             <p class="text-sm text-gray-300">
-              {{ stat.label }}
+              {{ statItem.label }}
             </p>
           </div>
         </div>

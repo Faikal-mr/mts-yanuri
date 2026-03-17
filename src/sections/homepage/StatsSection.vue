@@ -1,20 +1,18 @@
-<script setup>
-import { ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
 import Container from '@/components/ui/Container.vue'
+import { STATS_LIST } from '@/constants/stats'
 
-const stats = [
-  { id: 1, label: 'Siswa', value: 500, icon: '🎓' },
-  { id: 2, label: 'Guru', value: 30, icon: '👨‍🏫' },
-  { id: 3, label: 'Kelas', value: 20, icon: '🏫' },
-  { id: 4, label: 'Tahun Berdiri', value: 10, icon: '📅' },
-]
+const statsList = STATS_LIST
 
-const counters = ref(stats.map(() => 0))
-const sectionRef = ref(null)
+const counters = ref<number[]>(statsList.map(() => 0))
+const sectionRef = ref<HTMLElement | null>(null)
+
 let started = false
+let observer: IntersectionObserver | null = null
 
 const animateCounters = () => {
-  stats.forEach((stat, index) => {
+  statsList.forEach((stat, index) => {
     let start = 0
     const end = stat.value
 
@@ -35,7 +33,7 @@ const animateCounters = () => {
 }
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
+  observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && !started) {
@@ -44,12 +42,19 @@ onMounted(() => {
         }
       })
     },
-    {
-      threshold: 0.4,
-    },
+    { threshold: 0.4 },
   )
 
-  observer.observe(sectionRef.value)
+  if (sectionRef.value) {
+    observer.observe(sectionRef.value)
+  }
+})
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect()
+    observer = null
+  }
 })
 </script>
 
@@ -63,6 +68,7 @@ onMounted(() => {
         alt="Sekolah"
         class="w-full h-full object-cover"
         loading="lazy"
+        decoding="async"
       />
 
       <!-- Gradient Overlay -->
@@ -87,25 +93,25 @@ onMounted(() => {
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div
-          v-for="(stat, index) in stats"
-          :key="stat.id"
+          v-for="(statItem, index) in statsList"
+          :key="statItem.id"
           class="stats-card group"
           :style="{ animationDelay: `${index * 120}ms` }"
         >
           <!-- Icon -->
 
           <div class="text-3xl mb-4 opacity-90">
-            {{ stat.icon }}
+            {{ statItem.icon }}
           </div>
 
           <!-- Number -->
 
-          <p class="text-5xl font-bold tracking-tight">{{ counters[index] }}+</p>
+          <p class="text-5xl font-bold tracking-tight">{{ counters[index] ?? 0 }}++</p>
 
           <!-- Label -->
 
           <p class="mt-3 text-green-100 text-sm tracking-wide">
-            {{ stat.label }}
+            {{ statItem.label }}
           </p>
         </div>
       </div>

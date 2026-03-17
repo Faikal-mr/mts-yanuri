@@ -1,22 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
 import Button from '@/components/ui/Button.vue'
+import { ABOUT_DATA } from '@/constants/about'
+import SectionTitle from '@/components/ui/SectionTitle.vue'
 
-const about = {
-  title: 'Tentang Sekolah',
-
-  description: [
-    'Madrasah Tsanawiyah Yanuri Annamira merupakan lembaga pendidikan Islam yang berkomitmen membentuk generasi Qurani yang berakhlak mulia, berilmu, dan siap menghadapi tantangan masa depan.',
-    'Dengan tenaga pengajar profesional dan lingkungan belajar yang kondusif, kami memberikan pendidikan yang seimbang antara akademik dan nilai-nilai Islam.',
-  ],
-
-  experience: {
-    value: '10+',
-    label: 'Tahun Pengalaman',
-  },
-
-  image: '/images/sekolah1.webp',
-}
+const aboutData = ABOUT_DATA
 </script>
 
 <template>
@@ -27,10 +15,11 @@ const about = {
 
         <div class="relative group">
           <img
-            :src="about.image"
+            :src="aboutData.image"
             alt="Sekolah"
             class="rounded-xl shadow-lg object-cover transition duration-500 group-hover:scale-[1.02]"
             loading="lazy"
+            decoding="async"
           />
 
           <!-- Experience Badge -->
@@ -39,11 +28,11 @@ const about = {
             class="absolute -bottom-6 -right-6 bg-primary text-white px-6 py-4 rounded-lg shadow-lg"
           >
             <p class="text-2xl font-bold">
-              {{ about.experience.value }}
+              {{ aboutData.experience.value }}
             </p>
 
             <p class="text-sm">
-              {{ about.experience.label }}
+              {{ aboutData.experience.label }}
             </p>
           </div>
         </div>
@@ -54,13 +43,19 @@ const about = {
           <SectionTitle normal="Tentang" accent="Sekolah" />
 
           <div class="mt-6 space-y-4">
-            <p v-for="text in about.description" :key="text" class="text-gray-600 leading-relaxed">
-              {{ text }}
+            <p
+              v-for="descItem in aboutData.description"
+              :key="descItem"
+              class="text-gray-600 leading-relaxed"
+            >
+              {{ descItem }}
             </p>
           </div>
 
           <div class="mt-8">
-            <Button> Pelajari Lebih Lanjut </Button>
+            <RouterLink to="/tentang">
+              <Button> Pelajari Lebih Lanjut </Button>
+            </RouterLink>
           </div>
         </div>
       </div>

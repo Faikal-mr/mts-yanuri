@@ -1,21 +1,19 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import Container from '@/components/ui/Container.vue'
+import { NAV_MENU } from '@/constants/navigation'
+import { SITE_INFO } from '@/constants/site'
+const isMenuOpen = ref(false)
 
-const open = ref(false)
-
-const menus = [
-  { name: 'Home', path: '/' },
-  { name: 'Tentang', path: '/tentang' },
-  { name: 'Program', path: '/program' },
-  { name: 'Berita', path: '/berita' },
-  { name: 'Kontak', path: '/kontak' },
-]
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value
+}
 
 const closeMenu = () => {
-  open.value = false
+  isMenuOpen.value = false
 }
+const navMenu = NAV_MENU
 </script>
 
 <template>
@@ -28,13 +26,13 @@ const closeMenu = () => {
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
 
-        <RouterLink to="/" class="flex items-center gap-3">
+        <RouterLink to="/" class="flex items-center gap-3" @click="closeMenu">
           <img src="@/assets/images/ujang.svg" alt="Logo" class="h-10" />
 
           <div class="leading-tight">
-            <p class="font-semibold text-primary text-sm">Yayasan Nurul Islam</p>
+            <p class="font-semibold text-primary text-sm">{{ SITE_INFO.name }}</p>
 
-            <p class="text-xs text-gray-500">MTs Yanuri Annamira</p>
+            <p class="text-xs text-gray-500">{{ SITE_INFO.subName }}</p>
           </div>
         </RouterLink>
 
@@ -42,7 +40,7 @@ const closeMenu = () => {
 
         <nav class="hidden md:flex items-center gap-8 text-gray-700 font-medium">
           <RouterLink
-            v-for="menu in menus"
+            v-for="menu in navMenu"
             :key="menu.path"
             :to="menu.path"
             class="hover:text-primary transition"
@@ -53,28 +51,28 @@ const closeMenu = () => {
 
         <!-- CTA -->
 
-        <div class="hidden md:block">
+        <!-- <div class="hidden md:block">
           <RouterLink
             to="/pendaftaran"
             class="bg-primary text-white px-5 py-2 rounded-lg hover:bg-primary-dark transition"
           >
             Daftar
           </RouterLink>
-        </div>
+        </div> -->
 
         <!-- Mobile Button -->
 
-        <button class="md:hidden text-2xl" @click="open = !open">☰</button>
+        <button class="md:hidden text-2xl" @click="toggleMenu" aria-label="Toggle Menu">☰</button>
       </div>
     </Container>
 
     <!-- MOBILE MENU -->
 
-    <div v-if="open" class="md:hidden bg-white border-t">
+    <div v-if="isMenuOpen" class="md:hidden bg-white border-t">
       <Container>
         <div class="flex flex-col py-6 gap-4 text-gray-700 font-medium">
           <RouterLink
-            v-for="menu in menus"
+            v-for="menu in navMenu"
             :key="menu.path"
             :to="menu.path"
             @click="closeMenu"
