@@ -1,5 +1,5 @@
 export default {
-  mounted(el) {
+  mounted(el: HTMLElement) {
     el.classList.add('reveal')
 
     const observer = new IntersectionObserver(

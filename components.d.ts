@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BaseIcon: typeof import('./src/components/ui/BaseIcon.vue')['default']
     Button: typeof import('./src/components/ui/Button.vue')['default']
     Card: typeof import('./src/components/ui/Card.vue')['default']
     Container: typeof import('./src/components/ui/Container.vue')['default']

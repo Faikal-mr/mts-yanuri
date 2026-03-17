@@ -13,7 +13,7 @@ const formattedDate = new Date(props.article.published_at).toLocaleDateString('i
 </script>
 
 <template>
-  <section class="relative py-20 bg-gray-50">
+  <section v-reveal class="relative py-20 bg-gray-50">
     <div class="max-w-5xl mx-auto px-6 text-center">
       <!-- Title -->
 

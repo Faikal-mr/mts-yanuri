@@ -17,7 +17,7 @@ const formatDate = (date: string) => {
 </script>
 
 <template>
-  <section class="py-20 bg-gray-50">
+  <section v-reveal class="py-20 bg-gray-50">
     <Container>
       <!-- Header -->
 

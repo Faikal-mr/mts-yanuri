@@ -8,6 +8,24 @@ const { news, loading, page, total, perPage } = useNewsPagination()
 
 const totalPages = computed(() => Math.ceil(total.value / perPage))
 
+// 🔥 pagination max 5
+const visiblePages = computed(() => {
+  const max = 5
+  const start = Math.floor((page.value - 1) / max) * max + 1
+  const end = Math.min(start + max - 1, totalPages.value)
+
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i)
+})
+
+// 🔥 next & prev
+const nextPage = () => {
+  if (page.value < totalPages.value) page.value++
+}
+
+const prevPage = () => {
+  if (page.value > 1) page.value--
+}
+
 const formatDate = (date: string) => {
   return new Date(date).toLocaleDateString('id-ID', {
     day: 'numeric',
@@ -16,9 +34,8 @@ const formatDate = (date: string) => {
   })
 }
 </script>
-
 <template>
-  <section class="py-28 bg-gray-50">
+  <section v-reveal class="py-28 bg-gray-50">
     <Container>
       <!-- Loading -->
 
@@ -59,9 +76,14 @@ const formatDate = (date: string) => {
 
       <!-- Pagination -->
 
-      <div v-if="totalPages > 1" class="flex justify-center gap-3 mt-16">
+      <!-- Pagination -->
+      <div v-if="totalPages > 1" class="flex justify-center items-center gap-2 mt-16">
+        <!-- Prev -->
+        <button @click="prevPage" :disabled="page === 1" class="pagination-btn">←</button>
+
+        <!-- Numbers (max 5) -->
         <button
-          v-for="p in totalPages"
+          v-for="p in visiblePages"
           :key="p"
           @click="page = p"
           class="pagination-btn"
@@ -69,6 +91,9 @@ const formatDate = (date: string) => {
         >
           {{ p }}
         </button>
+
+        <!-- Next -->
+        <button @click="nextPage" :disabled="page === totalPages" class="pagination-btn">→</button>
       </div>
     </Container>
   </section>

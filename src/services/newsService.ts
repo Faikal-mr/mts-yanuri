@@ -49,15 +49,14 @@ export const getNewsPaginated = async (page: number, limit: number = 6) => {
 }
 
 export const newsService = {
-  async getNewsBySlug(slug: string) {
-    const { data, error } = await supabase
-      .from('news')
-      .select('title,slug,content,image,published_at')
-      .eq('slug', slug)
-      .single()
+  async getNewsBySlug(slug: string): Promise<News | null> {
+    const { data, error } = await supabase.from('news').select('*').eq('slug', slug).single()
 
-    if (error) throw error
+    if (error) {
+      console.error(error)
+      return null
+    }
 
-    return data
+    return data as News
   },
 }

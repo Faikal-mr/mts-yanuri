@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <section class="py-16">
+  <section v-reveal class="py-16">
     <div class="max-w-3xl mx-auto px-6">
       <!-- Article Content -->
 

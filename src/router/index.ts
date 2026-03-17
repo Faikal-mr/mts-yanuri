@@ -18,6 +18,10 @@ const routes = [
     path: '/berita',
     component: () => import('../pages/BeritaPage.vue'),
   },
+  {
+    path: '/kontak',
+    component: () => import('../pages/KontakPage.vue'),
+  },
 
   ...newsRoutes,
 ]

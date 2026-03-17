@@ -11,7 +11,7 @@ const hero = {
 </script>
 
 <template>
-  <section class="relative py-40 overflow-hidden text-white">
+  <section v-reveal class="relative py-40 overflow-hidden text-white">
     <!-- Background -->
 
     <div class="absolute inset-0">
