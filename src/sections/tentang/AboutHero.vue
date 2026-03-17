@@ -1,100 +1,83 @@
-<script setup>
+<script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
 import { RouterLink } from 'vue-router'
+import { ABOUT_HERO_DATA } from '@/constants/about'
 
-const hero = {
-  title: 'Tentang Sekolah',
-
-  description:
-    'Mengenal lebih dekat Madrasah Tsanawiyah Yanuri Annamira dan komitmen kami dalam membangun generasi Qurani.',
-
-  image: '/images/sekolah1.webp',
-}
+const aboutHeroData = ABOUT_HERO_DATA
 </script>
 
 <template>
-  <section v-reveal class="relative py-44 overflow-hidden text-white">
-    <!-- Background Image -->
+  <section v-reveal class="relative py-28 overflow-hidden">
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Content -->
+        <div class="relative z-10">
+          <!-- Breadcrumb -->
+          <div class="text-sm text-gray-500 mb-6 flex gap-2">
+            <template v-for="item in aboutHeroData.breadcrumbs" :key="item.label">
+              <RouterLink v-if="item.to" :to="item.to" class="hover:text-primary transition">
+                {{ item.label }}
+              </RouterLink>
 
-    <div class="absolute inset-0">
-      <img :src="hero.image" alt="Sekolah" class="w-full h-full object-cover scale-105 hero-zoom" />
+              <span v-else class="text-gray-800 font-medium">
+                {{ item.label }}
+              </span>
 
-      <!-- Gradient Overlay -->
+              <span v-if="item !== aboutHeroData.breadcrumbs[aboutHeroData.breadcrumbs.length - 1]">
+                /
+              </span>
+            </template>
+          </div>
 
-      <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
-    </div>
+          <!-- Label -->
+          <p class="text-sm uppercase tracking-widest text-primary mb-4">Profil Sekolah</p>
 
-    <!-- Decorative Blur -->
+          <!-- Title -->
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
+            {{ aboutHeroData.title }}
+          </h1>
 
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
-      <div class="hero-shape w-72 h-72 bg-white/10 rounded-full top-[-120px] left-[-120px]"></div>
+          <!-- Description -->
+          <p class="mt-6 text-gray-600 text-lg leading-relaxed max-w-xl">
+            {{ aboutHeroData.description }}
+          </p>
 
-      <div
-        class="hero-shape w-96 h-96 bg-white/10 rounded-full bottom-[-120px] right-[-120px]"
-      ></div>
-    </div>
-
-    <Container class="relative z-10">
-      <div class="text-center max-w-2xl mx-auto">
-        <!-- Breadcrumb -->
-
-        <div class="text-sm text-gray-300 mb-6 flex justify-center gap-2">
-          <RouterLink to="/" class="hover:text-white transition"> Beranda </RouterLink>
-
-          <span>/</span>
-
-          <span class="text-white">Tentang</span>
+          <!-- Accent -->
+          <div class="mt-8 w-20 h-1 bg-primary rounded-full"></div>
         </div>
 
-        <!-- Title -->
+        <!-- Image -->
+        <div class="relative">
+          <div class="rounded-3xl overflow-hidden shadow-2xl">
+            <img
+              :src="aboutHeroData.image"
+              alt="Sekolah"
+              class="w-full h-[400px] md:h-[500px] object-cover"
+            />
+          </div>
 
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-          {{ hero.title }}
-        </h1>
+          <!-- Card -->
+          <div
+            class="absolute -bottom-8 -left-8 bg-white rounded-2xl shadow-xl p-6 max-w-xs hidden md:block"
+          >
+            <p class="text-sm text-gray-500">Komitmen Kami</p>
 
-        <!-- Description -->
-
-        <p class="mt-6 text-gray-200 text-lg leading-relaxed">
-          {{ hero.description }}
-        </p>
+            <p class="mt-2 font-semibold text-gray-800">
+              Membangun generasi Qurani yang unggul dan berakhlak mulia.
+            </p>
+          </div>
+        </div>
       </div>
     </Container>
   </section>
 </template>
 
 <style scoped>
-.hero-zoom {
-  animation: heroZoom 12s ease-in-out infinite alternate;
+img {
+  transition: transform 0.6s ease;
 }
 
-@keyframes heroZoom {
-  from {
-    transform: scale(1.05);
-  }
-
-  to {
-    transform: scale(1.15);
-  }
-}
-
-.hero-shape {
-  position: absolute;
-  filter: blur(120px);
-  opacity: 0.25;
-  animation: float 12s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-30px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
+img:hover {
+  transform: scale(1.05);
 }
 </style>

@@ -1,40 +1,15 @@
-<script setup>
+<script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
+import SectionTitle from '@/components/ui/SectionTitle.vue'
+import { VISION_MISSION_DATA } from '@/constants/about'
 
-const visionMission = {
-  vision:
-    'Menjadi lembaga pendidikan Islam yang unggul dalam membentuk generasi Qurani yang berakhlak mulia, berilmu, dan berprestasi.',
-
-  missions: [
-    {
-      id: 1,
-      text: 'Menanamkan nilai-nilai Al-Qur’an dalam kehidupan sehari-hari.',
-      icon: '📖',
-    },
-    {
-      id: 2,
-      text: 'Mengembangkan potensi akademik dan intelektual siswa.',
-      icon: '🎓',
-    },
-    {
-      id: 3,
-      text: 'Membentuk karakter Islami yang berakhlak mulia.',
-      icon: '🌱',
-    },
-    {
-      id: 4,
-      text: 'Mempersiapkan generasi yang siap menghadapi masa depan.',
-      icon: '🚀',
-    },
-  ],
-}
+const visionMissionData = VISION_MISSION_DATA
 </script>
 
 <template>
   <section v-reveal class="py-28 bg-gray-50 relative overflow-hidden">
     <Container>
-      <!-- Section Header -->
-
+      <!-- Header -->
       <div class="text-center mb-20 max-w-2xl mx-auto">
         <SectionTitle normal="Visi &" accent="Misi" />
 
@@ -45,28 +20,30 @@ const visionMission = {
 
       <div class="grid lg:grid-cols-2 gap-16 items-start">
         <!-- Vision -->
-
         <div class="vision-card">
           <h3 class="text-2xl font-semibold mb-6">Visi</h3>
 
           <p class="text-gray-600 leading-relaxed text-lg">
-            {{ visionMission.vision }}
+            {{ visionMissionData.vision }}
           </p>
         </div>
 
         <!-- Mission -->
-
         <div>
           <h3 class="text-2xl font-semibold mb-6">Misi</h3>
 
           <div class="space-y-6">
-            <div v-for="mission in visionMission.missions" :key="mission.id" class="mission-card">
+            <div
+              v-for="missionItem in visionMissionData.missions"
+              :key="missionItem.id"
+              class="mission-card"
+            >
               <div class="icon">
-                {{ mission.icon }}
+                {{ missionItem.icon }}
               </div>
 
               <p class="text-gray-600">
-                {{ mission.text }}
+                {{ missionItem.text }}
               </p>
             </div>
           </div>

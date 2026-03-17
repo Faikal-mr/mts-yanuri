@@ -1,43 +1,15 @@
-<script setup>
+<script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
+import SectionTitle from '@/components/ui/SectionTitle.vue'
+import { HISTORY_DATA } from '@/constants/about'
 
-const history = [
-  {
-    id: 1,
-    year: '2015',
-    title: 'Pendirian Sekolah',
-    description:
-      'MTs Yanuri Annamira didirikan dengan tujuan memberikan pendidikan Islam yang berkualitas bagi generasi muda.',
-  },
-  {
-    id: 2,
-    year: '2018',
-    title: 'Pengembangan Program Tahfidz',
-    description:
-      'Sekolah mulai mengembangkan program tahfidz Al-Qur’an sebagai salah satu program unggulan.',
-  },
-  {
-    id: 3,
-    year: '2021',
-    title: 'Penguatan Akademik',
-    description:
-      'Berbagai program akademik dan kompetisi mulai dikembangkan untuk meningkatkan prestasi siswa.',
-  },
-  {
-    id: 4,
-    year: '2024',
-    title: 'Modernisasi Pembelajaran',
-    description:
-      'Sekolah mulai menerapkan teknologi dalam pembelajaran untuk meningkatkan kualitas pendidikan.',
-  },
-]
+const historyData = HISTORY_DATA
 </script>
 
 <template>
   <section v-reveal class="py-28 bg-white">
     <Container>
       <!-- Header -->
-
       <div class="text-center mb-20 max-w-2xl mx-auto">
         <SectionTitle normal="Sejarah" accent="Sekolah" />
 
@@ -48,37 +20,36 @@ const history = [
       </div>
 
       <!-- Timeline -->
-
       <div class="relative">
-        <!-- Vertical Line -->
-
+        <!-- Line -->
         <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gray-200 -translate-x-1/2"></div>
 
-        <!-- Timeline Items -->
-
-        <div v-for="(item, index) in history" :key="item.id" class="timeline-item">
+        <!-- Items -->
+        <div
+          v-for="(historyItem, index) in historyData"
+          :key="historyItem.id"
+          class="timeline-item"
+        >
           <div
             class="grid md:grid-cols-2 gap-12 items-center"
             :class="index % 2 === 0 ? '' : 'md:[direction:rtl]'"
           >
             <!-- Content -->
-
             <div class="timeline-card">
               <span class="year">
-                {{ item.year }}
+                {{ historyItem.year }}
               </span>
 
               <h3 class="title">
-                {{ item.title }}
+                {{ historyItem.title }}
               </h3>
 
               <p class="desc">
-                {{ item.description }}
+                {{ historyItem.description }}
               </p>
             </div>
 
-            <!-- Empty space for alternating layout -->
-
+            <!-- Spacer -->
             <div></div>
           </div>
         </div>

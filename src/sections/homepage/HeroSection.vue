@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import Container from '@/components/ui/Container.vue'
 import Button from '@/components/ui/Button.vue'
-import { HERO_DATA } from '@/constants/hero'
+import { HERO_DATA } from '@/constants/homepage'
 
 const { slides, stats } = HERO_DATA
 
@@ -64,26 +64,39 @@ onUnmounted(() => {
 
     <Container class="relative z-10">
       <div class="max-w-2xl hero-content">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-          Madrasah Tsanawiyah
+        <!-- Badge -->
+        <p class="text-sm uppercase tracking-widest text-accent mb-4">Sekolah Islam Modern</p>
 
-          <span class="border-b-4 border-accent pb-1"> Yanuri Annamira </span>
+        <!-- Headline (VALUE FIRST) -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          Membentuk Generasi Qurani yang Unggul & Berakhlak
         </h1>
 
-        <p class="mt-6 text-gray-200 text-lg leading-relaxed">
-          Membentuk generasi Qurani yang berakhlak mulia, cerdas, dan siap menghadapi masa depan.
+        <!-- School Name -->
+        <p class="mt-4 text-lg text-gray-200">
+          Madrasah Tsanawiyah
+          <span class="font-semibold text-white">Yanuri Annamira</span>
+        </p>
+
+        <!-- Description -->
+        <p class="mt-6 text-gray-300 text-lg leading-relaxed max-w-xl">
+          Pendidikan berbasis Al-Qur’an yang menggabungkan akademik modern dan pembinaan karakter
+          dalam lingkungan Islami.
         </p>
 
         <!-- Buttons -->
+        <div class="mt-8 flex flex-wrap gap-4">
+          <Button class="px-6 py-3 text-base shadow-lg"> Daftar Sekarang </Button>
 
-        <div class="mt-8 flex gap-4">
-          <Button> Daftar Sekarang </Button>
-
-          <Button variant="outline"> Program Kami </Button>
+          <Button
+            variant="outline"
+            class="px-6 py-3 text-base border-white text-white hover:bg-white hover:text-black"
+          >
+            Lihat Program
+          </Button>
         </div>
 
         <!-- Stats -->
-
         <div class="mt-12 grid grid-cols-3 gap-8 max-w-md">
           <div v-for="statItem in stats" :key="statItem.label">
             <p class="text-3xl font-bold">

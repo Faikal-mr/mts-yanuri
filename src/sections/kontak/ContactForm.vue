@@ -15,7 +15,7 @@ const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`
 </script>
 
 <template>
-  <section class="py-24 bg-gray-50 text-center">
+  <section v-reveal class="py-24 bg-gray-50 text-center">
     <Container>
       <h2 class="text-3xl font-bold text-gray-900">Pendaftaran PPDB</h2>
 

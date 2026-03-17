@@ -1,83 +1,58 @@
-<script setup>
+<script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
+import SectionTitle from '@/components/ui/SectionTitle.vue'
+import { METHODS_DATA } from '@/constants/program'
 
-const methods = [
-  {
-    id: 1,
-    title: 'Pembelajaran Berbasis Al-Qur’an',
-    desc: 'Setiap proses pembelajaran berlandaskan nilai-nilai Al-Qur’an untuk membentuk karakter siswa.',
-    icon: '📖',
-  },
-  {
-    id: 2,
-    title: 'Pendekatan Karakter Islami',
-    desc: 'Pembinaan akhlak melalui kegiatan harian dan pembiasaan nilai-nilai Islami.',
-    icon: '🌱',
-  },
-  {
-    id: 3,
-    title: 'Penguatan Akademik',
-    desc: 'Kurikulum dirancang untuk meningkatkan kemampuan akademik dan literasi siswa.',
-    icon: '🎓',
-  },
-  {
-    id: 4,
-    title: 'Teknologi Pendidikan',
-    desc: 'Pemanfaatan teknologi untuk mendukung proses belajar yang modern dan efektif.',
-    icon: '💻',
-  },
-]
+const methodsData = METHODS_DATA
 </script>
 
 <template>
   <section v-reveal class="relative py-32 bg-gray-50 overflow-hidden">
-    <!-- soft background decoration -->
-
+    <!-- Decoration -->
     <div class="absolute inset-0 pointer-events-none">
       <div class="bg-shape top-[-100px] right-[-120px]"></div>
     </div>
 
     <Container class="relative z-10">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <!-- LEFT CONTENT -->
-
+        <!-- Content -->
         <div>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-            Metode
-            <span class="border-b-4 border-red-500 pb-1"> Pembelajaran </span>
-          </h2>
+          <!-- Header -->
+          <SectionTitle normal="Metode" accent="Pembelajaran" />
 
           <p class="mt-6 text-gray-600 leading-relaxed max-w-lg">
-            Metode pembelajaran kami dirancang untuk mengembangkan potensi siswa secara akademik,
-            spiritual, dan karakter.
+            {{ methodsData.description }}
           </p>
 
-          <!-- METHOD LIST -->
-
+          <!-- List -->
           <div class="mt-10 space-y-6">
-            <div v-for="method in methods" :key="method.id" class="method-card group">
+            <div
+              v-for="methodItem in methodsData.items"
+              :key="methodItem.id"
+              class="method-card group"
+            >
               <div class="icon">
-                {{ method.icon }}
+                {{ methodItem.icon }}
               </div>
 
               <div>
                 <h3 class="title">
-                  {{ method.title }}
+                  {{ methodItem.title }}
                 </h3>
 
                 <p class="desc">
-                  {{ method.desc }}
+                  {{ methodItem.desc }}
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- RIGHT IMAGE -->
-
+        <!-- Image -->
         <div class="relative group">
           <img
-            src="/images/sekolah2.webp"
+            :src="methodsData.image"
+            alt="Metode Pembelajaran"
             class="rounded-2xl shadow-xl object-cover w-full h-[420px] transition duration-500 group-hover:scale-[1.03]"
           />
 
@@ -93,7 +68,7 @@ const methods = [
   position: absolute;
   width: 420px;
   height: 420px;
-  background: rgba(34, 197, 94, 0.08);
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
   border-radius: 50%;
   filter: blur(120px);
 }
@@ -120,7 +95,7 @@ const methods = [
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(34, 197, 94, 0.1);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
   font-size: 22px;
   flex-shrink: 0;
 }

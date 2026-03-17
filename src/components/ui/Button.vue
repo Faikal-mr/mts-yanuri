@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 defineProps({
   variant: {
     type: String,
@@ -11,9 +11,12 @@ defineProps({
   <button
     class="px-6 py-3 rounded-lg font-semibold transition"
     :class="{
-      'bg-green-700 text-white hover:bg-green-800': variant === 'primary',
-      'bg-red-600 text-white hover:bg-red-700': variant === 'accent',
-      'border border-gray-300 hover:bg-gray-100': variant === 'outline',
+      'bg-primary text-white hover:bg-primary-dark': variant === 'primary',
+
+      'bg-accent text-white hover:opacity-90': variant === 'accent',
+
+      'border border-white text-white hover:bg-white hover:text-primary hover:border-primary':
+        variant === 'outline',
     }"
   >
     <slot />

@@ -10,7 +10,7 @@ const location = {
 }
 </script>
 <template>
-  <section class="py-28 bg-gray-50">
+  <section v-reveal class="py-28 bg-gray-50">
     <Container>
       <!-- Header -->
       <div class="text-center max-w-xl mx-auto">

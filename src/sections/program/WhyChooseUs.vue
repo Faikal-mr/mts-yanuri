@@ -1,93 +1,58 @@
-<script setup>
+<script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
+import SectionTitle from '@/components/ui/SectionTitle.vue'
+import { ADVANTAGES_DATA } from '@/constants/program'
 
-const advantages = [
-  {
-    id: 1,
-    title: 'Kurikulum Terpadu',
-    desc: 'Menggabungkan kurikulum nasional dengan pendidikan karakter Islami.',
-    icon: '📚',
-  },
-  {
-    id: 2,
-    title: 'Pengajar Berpengalaman',
-    desc: 'Didukung oleh tenaga pendidik profesional dan berpengalaman.',
-    icon: '👨‍🏫',
-  },
-  {
-    id: 3,
-    title: 'Lingkungan Islami',
-    desc: 'Lingkungan sekolah yang mendukung pembentukan akhlak dan karakter.',
-    icon: '🕌',
-  },
-  {
-    id: 4,
-    title: 'Pengembangan Potensi',
-    desc: 'Berbagai kegiatan untuk mengembangkan bakat dan minat siswa.',
-    icon: '🌟',
-  },
-]
-
-const stats = [
-  { label: 'Siswa Aktif', value: '500+' },
-  { label: 'Tenaga Pengajar', value: '30+' },
-  { label: 'Program Unggulan', value: '8+' },
-]
+const advantagesData = ADVANTAGES_DATA
 </script>
 
 <template>
   <section v-reveal class="relative py-32 bg-white overflow-hidden">
     <Container>
-      <!-- HEADER -->
-
+      <!-- Header -->
       <div class="text-center mb-20 max-w-2xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-          Mengapa
-          <span class="border-b-4 border-red-500 pb-1"> Memilih Kami </span>
-        </h2>
+        <SectionTitle normal="Mengapa" accent="Memilih Kami" />
 
         <p class="mt-4 text-gray-500 leading-relaxed">
-          Komitmen kami dalam memberikan pendidikan terbaik untuk membentuk generasi Qurani yang
-          unggul.
+          {{ advantagesData.description }}
         </p>
       </div>
 
-      <!-- ADVANTAGES GRID -->
-
+      <!-- Content -->
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-        <div v-for="item in advantages" :key="item.id" class="advantage-card group">
-          <!-- ICON -->
-
+        <div
+          v-for="advantageItem in advantagesData.items"
+          :key="advantageItem.id"
+          class="advantage-card group"
+        >
+          <!-- Icon -->
           <div class="icon-wrapper">
             <span class="icon">
-              {{ item.icon }}
+              {{ advantageItem.icon }}
             </span>
           </div>
 
-          <!-- TITLE -->
-
+          <!-- Title -->
           <h3 class="title">
-            {{ item.title }}
+            {{ advantageItem.title }}
           </h3>
 
-          <!-- DESC -->
-
+          <!-- Desc -->
           <p class="desc">
-            {{ item.desc }}
+            {{ advantageItem.desc }}
           </p>
         </div>
       </div>
 
-      <!-- STATS -->
-
+      <!-- Stats -->
       <div class="mt-20 grid md:grid-cols-3 gap-10 text-center">
-        <div v-for="stat in stats" :key="stat.label" class="stat-card">
+        <div v-for="statItem in advantagesData.stats" :key="statItem.label" class="stat-card">
           <p class="text-4xl font-bold text-gray-900">
-            {{ stat.value }}
+            {{ statItem.value }}
           </p>
 
           <p class="text-gray-500 mt-2">
-            {{ stat.label }}
+            {{ statItem.label }}
           </p>
         </div>
       </div>
@@ -118,13 +83,13 @@ const stats = [
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: rgba(34, 197, 94, 0.1);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
   font-size: 28px;
   transition: all 0.3s ease;
 }
 
 .advantage-card:hover .icon-wrapper {
-  background: #22c55e;
+  background: var(--color-primary);
   color: white;
   transform: scale(1.1);
 }

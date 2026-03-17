@@ -4,6 +4,7 @@ import Container from '@/components/ui/Container.vue'
 
 <template>
   <section
+    v-reveal
     class="relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-gray-100 py-28"
   >
     <!-- background decoration -->

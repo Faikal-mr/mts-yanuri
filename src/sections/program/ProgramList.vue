@@ -1,79 +1,47 @@
-<script setup>
+<script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
+import SectionTitle from '@/components/ui/SectionTitle.vue'
+import { PROGRAMS_DATA } from '@/constants/program'
 
-const programs = [
-  {
-    id: 1,
-    title: "Tahfidz Al-Qur'an",
-    desc: "Program unggulan untuk membentuk generasi penghafal Al-Qur'an.",
-    icon: '📖',
-  },
-  {
-    id: 2,
-    title: 'Bahasa Arab',
-    desc: 'Pembelajaran bahasa Arab aktif untuk memahami literatur Islam.',
-    icon: '🕌',
-  },
-  {
-    id: 3,
-    title: 'Sains & Teknologi',
-    desc: 'Penguatan ilmu pengetahuan dan teknologi modern.',
-    icon: '🔬',
-  },
-  {
-    id: 4,
-    title: 'Karakter Islami',
-    desc: 'Pembentukan akhlak dan karakter berdasarkan nilai Islam.',
-    icon: '🌱',
-  },
-]
+const programsData = PROGRAMS_DATA
 </script>
 
 <template>
   <section v-reveal class="relative py-32 bg-gray-50 overflow-hidden">
-    <!-- decorative background -->
-
+    <!-- Decoration -->
     <div class="absolute inset-0 pointer-events-none">
       <div class="bg-shape top-[-120px] left-[-120px]"></div>
       <div class="bg-shape bottom-[-140px] right-[-120px]"></div>
     </div>
 
     <Container class="relative z-10">
-      <!-- header -->
-
+      <!-- Header -->
       <div class="text-center mb-20 max-w-2xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-          Program
-          <span class="border-b-4 border-red-500 pb-1"> Unggulan </span>
-        </h2>
+        <SectionTitle normal="Program" accent="Unggulan" />
 
         <p class="mt-4 text-gray-500 leading-relaxed">
           Program pendidikan yang dirancang untuk mengembangkan potensi akademik dan karakter siswa.
         </p>
       </div>
 
-      <!-- grid -->
-
+      <!-- Content -->
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-        <div v-for="program in programs" :key="program.id" class="program-card group">
-          <!-- icon -->
-
+        <div v-for="programItem in programsData" :key="programItem.id" class="program-card group">
+          <!-- Icon -->
           <div class="icon-wrapper">
             <span class="icon">
-              {{ program.icon }}
+              {{ programItem.icon }}
             </span>
           </div>
 
-          <!-- title -->
-
+          <!-- Title -->
           <h3 class="title">
-            {{ program.title }}
+            {{ programItem.title }}
           </h3>
 
-          <!-- desc -->
-
+          <!-- Description -->
           <p class="desc">
-            {{ program.desc }}
+            {{ programItem.desc }}
           </p>
         </div>
       </div>
@@ -86,7 +54,7 @@ const programs = [
   position: absolute;
   width: 420px;
   height: 420px;
-  background: rgba(34, 197, 94, 0.08);
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
   border-radius: 50%;
   filter: blur(120px);
 }
@@ -114,7 +82,7 @@ const programs = [
   bottom: 0;
   height: 4px;
   width: 0%;
-  background: linear-gradient(90deg, #22c55e, #ef4444);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
   transition: all 0.35s ease;
 }
 
@@ -130,13 +98,13 @@ const programs = [
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: rgba(34, 197, 94, 0.1);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
   font-size: 28px;
   transition: all 0.3s ease;
 }
 
 .program-card:hover .icon-wrapper {
-  background: #22c55e;
+  background: var(--color-primary);
   color: white;
   transform: scale(1.1);
 }

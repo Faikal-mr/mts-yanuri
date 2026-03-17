@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Container from '@/components/ui/Container.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
-import { PROGRAM_LIST } from '@/constants/program'
+import { PROGRAM_LIST } from '@/constants/homepage'
 
 const programList = PROGRAM_LIST
 </script>

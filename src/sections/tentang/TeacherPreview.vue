@@ -3,16 +3,15 @@ import Container from '@/components/ui/Container.vue'
 import SectionTitle from '@/components/ui/SectionTitle.vue'
 import { useTeachers } from '@/composables/useTeachers'
 
-const { teachers, loading } = useTeachers()
+const { teachers: teachersData, loading } = useTeachers()
 
-const fallbackImage = 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5'
+const teacherFallbackImage = 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5'
 </script>
 
 <template>
   <section v-reveal class="py-28 bg-gray-50">
     <Container>
       <!-- Header -->
-
       <div class="text-center mb-20 max-w-2xl mx-auto">
         <SectionTitle normal="Tenaga" accent="Pengajar" />
 
@@ -21,73 +20,71 @@ const fallbackImage = 'https://images.unsplash.com/photo-1568602471122-7832951cc
         </p>
       </div>
 
-      <!-- Loading -->
+      <!-- Content -->
+      <div>
+        <!-- Loading -->
+        <div v-if="loading" class="text-center text-gray-400">Memuat data pengajar...</div>
 
-      <div v-if="loading" class="text-center text-gray-400">Memuat data pengajar...</div>
+        <!-- Grid -->
+        <div v-else class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <article
+            v-for="teacherItem in teachersData"
+            :key="teacherItem.id"
+            class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
+          >
+            <!-- Image -->
+            <div class="relative overflow-hidden">
+              <img
+                :src="teacherItem.photo_url || teacherFallbackImage"
+                :alt="teacherItem.name"
+                class="w-full h-72 object-cover transition duration-500 group-hover:scale-110"
+              />
 
-      <!-- Teachers Grid -->
+              <!-- Overlay -->
+              <div class="overlay">
+                <div class="socials">
+                  <a
+                    v-if="teacherItem.social_facebook"
+                    :href="teacherItem.social_facebook"
+                    target="_blank"
+                    class="social"
+                  >
+                    f
+                  </a>
 
-      <div v-else class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-        <article
-          v-for="teacher in teachers"
-          :key="teacher.id"
-          class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
-        >
-          <!-- Image -->
+                  <a
+                    v-if="teacherItem.social_instagram"
+                    :href="teacherItem.social_instagram"
+                    target="_blank"
+                    class="social"
+                  >
+                    i
+                  </a>
 
-          <div class="relative overflow-hidden">
-            <img
-              :src="teacher.photo_url || fallbackImage"
-              :alt="teacher.name"
-              class="w-full h-72 object-cover transition duration-500 group-hover:scale-110"
-            />
-
-            <!-- Overlay -->
-
-            <div class="overlay">
-              <div class="socials">
-                <a
-                  v-if="teacher.social_facebook"
-                  :href="teacher.social_facebook"
-                  target="_blank"
-                  class="social"
-                >
-                  f
-                </a>
-
-                <a
-                  v-if="teacher.social_instagram"
-                  :href="teacher.social_instagram"
-                  target="_blank"
-                  class="social"
-                >
-                  i
-                </a>
-
-                <a
-                  v-if="teacher.social_linkedin"
-                  :href="teacher.social_linkedin"
-                  target="_blank"
-                  class="social"
-                >
-                  in
-                </a>
+                  <a
+                    v-if="teacherItem.social_linkedin"
+                    :href="teacherItem.social_linkedin"
+                    target="_blank"
+                    class="social"
+                  >
+                    in
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Info -->
+            <!-- Info -->
+            <div class="py-5 px-4 text-center">
+              <h3 class="text-lg font-semibold text-gray-900">
+                {{ teacherItem.name }}
+              </h3>
 
-          <div class="py-5 px-4 text-center">
-            <h3 class="text-lg font-semibold text-gray-900">
-              {{ teacher.name }}
-            </h3>
-
-            <p class="text-sm text-gray-500 mt-1">
-              {{ teacher.role }}
-            </p>
-          </div>
-        </article>
+              <p class="text-sm text-gray-500 mt-1">
+                {{ teacherItem.role }}
+              </p>
+            </div>
+          </article>
+        </div>
       </div>
     </Container>
   </section>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import Container from '@/components/ui/Container.vue'
-import { STATS_LIST } from '@/constants/stats'
+import { STATS_LIST } from '@/constants/homepage'
 
 const statsList = STATS_LIST
 

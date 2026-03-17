@@ -46,7 +46,7 @@ const socialItems: SocialItem[] = [
 ]
 </script>
 <template>
-  <section class="py-28 bg-white">
+  <section v-reveal class="py-28 bg-white">
     <Container>
       <!-- Header -->
       <div class="text-center max-w-xl mx-auto">

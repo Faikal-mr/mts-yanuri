@@ -3,31 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <link rel="preload" href="/fonts/poppins.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#15803d" />
     <title>MTs Yanuri Annamira</title>
 
-    <meta
-      name="description"
-      content="Madrasah Tsanawiyah Yanuri Annamira membentuk generasi Qurani yang berakhlak mulia dan unggul dalam ilmu pengetahuan."
-    />
-
-    <meta property="og:title" content="MTs Yanuri Annamira" />
-
-    <meta
-      property="og:description"
-      content="Madrasah Tsanawiyah modern dengan pendidikan akademik dan nilai Islam."
-    />
-
-    <meta property="og:image" content="/images/sekolah1.webp" />
-
+    <meta property="og:title" content="MTs Yanuri" />
+    <meta property="og:description" content="Website resmi MTs Yanuri Annamira." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mts-yanuri-project-v1.vercel.app/" />
+    <meta property="og:image" content="https://mts-yanuri-project-v1.vercel.app/preview.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "School",
+        "name": "MTs Yanuri Annamira",
+        "url": "https://mts-yanuri-project-v1.vercel.app/",
+        "logo": "https://mts-yanuri-project-v1.vercel.app/logo.png",
+        "description": "Madrasah Tsanawiyah dengan pendidikan Qurani dan akademik.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "ID"
+        }
+      }
+    </script>
   </body>
 </html>
